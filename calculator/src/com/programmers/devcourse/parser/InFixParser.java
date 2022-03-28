@@ -9,26 +9,20 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegexParser implements Parser {
+public class InFixParser implements Parser {
 
   private final String pattern;
   private final String operatorPattern;
   private final String numberPattern;
 
 
-  public RegexParser() {
+  public InFixParser() {
     this.pattern = "([+*-/])|([0-9]{1,7}(\\.[0-9]{1,7})?)";
     String[] dividedPatterns = pattern.split("\\|");
     operatorPattern = dividedPatterns[0];
     numberPattern = dividedPatterns[1];
   }
 
-  public RegexParser(String pattern) {
-    this.pattern = pattern;
-    String[] dividedPatterns = pattern.split("\\|");
-    operatorPattern = dividedPatterns[0];
-    numberPattern = dividedPatterns[1];
-  }
 
   @Override
   public List<String> parse(String target) throws ParserException {

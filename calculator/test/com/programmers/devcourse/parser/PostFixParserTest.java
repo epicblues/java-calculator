@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
-class RegexParserTest {
+class PostFixParserTest {
 
   static Parser parser;
   Object[] parsedTokenArray;
@@ -17,12 +17,11 @@ class RegexParserTest {
 
   @BeforeAll
   public static void settingParser() {
-    parser = new RegexParser();
+    parser = new PostFixParser();
   }
 
   @Test
   void testParserShouldReturnProperTokenArrayWhenTargetStringHasNoSpace() throws ParserException {
-    Parser parser = new RegexParser();
     // test 공백 없이 붙여 넣었을 때
     parsedTokenArray = parser.parse("1+2*3+4.54234").toArray();
     compareTarget =
@@ -37,6 +36,10 @@ class RegexParserTest {
 
     });
 
+    parsedTokenArray = parser.parse("1+2*(3+4.54234)").toArray();
+    compareTarget =
+        new String[]{"1", "+", "2", "*", "(", "3", "+", "4.54234", ")"};
+    Assertions.assertArrayEquals(parsedTokenArray, compareTarget);
 
   }
 

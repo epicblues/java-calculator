@@ -13,6 +13,6 @@ public class Result<K, V extends Number> {
 
   @Override
   public String toString() {
-    return this.key + " = " + this.value;
+    return this.key.toString() + " = " + this.value.toString();
   }
 }
